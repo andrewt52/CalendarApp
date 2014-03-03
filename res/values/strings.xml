@@ -7,5 +7,6 @@
     <string name="title_activity_add_event">AddEventActivity</string>
     <string name="title_activity_year_gui">YearGUI</string>
     <string name="events_title">Events</string>
+    <string name="title_activity_view_event">View Event</string>
 
 </resources>

@@ -92,7 +92,8 @@ public class EventListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 	    super.onListItemClick(l, v, position, id);
-		ArrayList<Event> mEvents = EventManager.get(getActivity()).getEventList();
+	    Date d = (Date)getArguments().getSerializable(EXTRA_DATE);
+		ArrayList<Event> mEvents = EventManager.get(getActivity()).getEventListByDate(d);
 		UUID mEID = mEvents.get(position).getEID();
 
 		long mostSignificantBits = mEID.getMostSignificantBits();
@@ -101,9 +102,6 @@ public class EventListFragment extends ListFragment {
 		i.putExtra("mostSignificantBits", mostSignificantBits);
 		i.putExtra("leastSignificantBits", leastSignificantBits);
 		startActivity(i);
-
-
-	    Toast.makeText(getActivity(), "Hello + " + position, Toast.LENGTH_SHORT).show();
 	}
 
 }

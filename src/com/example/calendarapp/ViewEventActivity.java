@@ -7,12 +7,15 @@ import java.util.UUID;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewEventActivity extends Activity {
 
@@ -83,10 +86,30 @@ public class ViewEventActivity extends Activity {
 			public void onClick(View v) {
 			/*
 			 * Make a confirm dialogue
+			 * 
 			 */
 				
-				EventManager.get(getApplicationContext()).DeleteEvent(mEID);
-				finish();
+				boolean delete = false;
+				
+				AlertDialog.Builder confirmation = new AlertDialog.Builder(ViewEventActivity.this);
+				confirmation.setTitle("Confirm Delete");
+				confirmation.setMessage("Are you sure you want to delete this event?");
+				confirmation.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	EventManager.get(getApplicationContext()).DeleteEvent(mEID);
+						dialog.cancel();
+						Toast.makeText(getApplicationContext(), "Event Deleted", Toast.LENGTH_SHORT).show();
+			        	finish();
+			           }
+			       });
+				confirmation.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   dialog.cancel();
+			           }
+			       });
+				
+				AlertDialog dialog = confirmation.create();
+				dialog.show();
 			}
 		});
 		

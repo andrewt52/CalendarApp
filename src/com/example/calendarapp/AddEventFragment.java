@@ -70,8 +70,6 @@ public class AddEventFragment extends Fragment {
 				EventManager.get(getActivity()).AddEvent(mEventName,mLocation,mDate,mDescription);
 				Toast toast = Toast.makeText(getActivity(), "Event added.", Toast.LENGTH_SHORT); 
 				toast.show();
-				Intent i = new Intent(getActivity(), MonthActivity.class);
-   				startActivity(i);
    				getActivity().finish();
 				}
 			
